@@ -3,7 +3,7 @@
 
 #include "IHandle.h"
 
-class Module : public IHandle {
+class W32_EXPORT Module : public IHandle {
 public:
 	Module();
 	~Module();

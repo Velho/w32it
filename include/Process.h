@@ -3,17 +3,10 @@
 
 #include "IHandle.h"
 
-#ifdef W32SHARED
-#define W32 __declspec(dllexport)
-#else
-#define W32 __declspec(dllimport)
-#endif
-
-
 /**
  *
  */
-class W32 Process : public IHandle {
+class W32_EXPORT Process : public IHandle {
 public:
 	Process();
 	~Process();

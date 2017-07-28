@@ -2,22 +2,24 @@
 #define W32ITERATOR_PROCESSVECTOR_H
 
 #include <vector>
-#include <windows.h>
 
-#ifdef W32SHARED
-#define W32 __declspec(dllexport)
-#else
-#define W32 __declspec(dllimport)
-#endif
+#include "Exports.h"
+#include "ProcessIterator.h"
 
+class Process;
 
 /**
  *
  */
-class W32 ProcessVector {
+class W32_EXPORT ProcessVector {
 	std::vector<Process *> processVector;
 public:
+	ProcessVector();
+	~ProcessVector();
 
+
+	ProcessIterator begin();
+	ProcessIterator end();
 };
 
 #endif

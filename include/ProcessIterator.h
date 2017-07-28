@@ -1,47 +1,39 @@
 #ifndef W32ITERATOR_PROCESSITERATOR_H
 #define W32ITERATOR_PROCESSITERATOR_H
 
-#ifdef W32SHARED
-#define W32 __declspec(dllexport)
-#else
-#define W32 __declspec(dllimport)
-#endif
+#include <windows.h>
+#include <tlhelp32.h>
+
+#include "Exports.h"
+
+class Process;
 
 /**
  * Iterating over the processes provided the snapshot
  * (not the object inside ProcessVector).
  */
-class W32 ProcessIterator {
+class W32_EXPORT ProcessIterator {
+	// Snapshot of the processes presented by the os.
 	HANDLE snapshot;
-	// Copy of the snapshot ? Required to keep the state
+	// Copy of the snapshot ? Required to keep the state.
 	PROCESSENTRY32 entry;
+	// Created object, allocated on the vector.
+	Process *ptr;
 public:
 	/*
 	 * Default ctor.
 	 * If failing to create the snapshot : begin == end
 	 */
-	Iterator()
-	{
-		snapshot = CreateToolhelp32Snapshot ( TH32CS_SNAPPROCESS, 0 );
-	}
+	ProcessIterator();
 
-	Iterator(const Iterator& rhs)
-	{
-		snapshot = rhs.snapshot;
-		entry = rhs.entry;
-	}
+	ProcessIterator(const ProcessIterator& rhs);
+	~ProcessIterator();
+	
+	ProcessIterator begin();
+	ProcessIterator end();
 
-	~Iterator()
-	{
-		if(snapshot != NULL)
-			CloseHandle(snapshot);
-	}
-
-	Iterator begin();
-	Iterator end();
-
-	Iterator operator++(int); // Post incr.
-	Iterator& operator++();   // Pre incr.
+	ProcessIterator operator++(int); // Post incr.
+	ProcessIterator& operator++();   // Pre incr.
 
 	// Deref, returning the IHandle object or directly the Entry -member ??
 	/*

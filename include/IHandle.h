@@ -1,16 +1,13 @@
 #ifndef W32ITERATOR_HANDLEINTERFACE_H
 #define W32ITERATOR_HANDLEINTERFACE_H
 
-#ifdef W32SHARED
-#define W32 __declspec(dllexport)
-#else
-#define W32 __declspec(dllimport)
-#endif
+#include "Exports.h"
 
 /**
  * Defines a interface for the handle object.
  */
-class W32 IHandle {
+class W32_EXPORT IHandle {
+	using HANDLE = void *;
 protected:
 	HANDLE handle;
 public:
