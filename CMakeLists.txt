@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.2)
-project(W32It)
+project(w32it)
 
 set(LIB_TYPE STATIC)
 option(W32SHARED "Build W32It libraries shared." ON)
