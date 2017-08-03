@@ -1,10 +1,12 @@
 #ifndef W32ITERATOR_PROCESSITERATOR_H
 #define W32ITERATOR_PROCESSITERATOR_H
 
+#include "dllexport.h"
+
+// Anything to forward declare from these ??
+// TODO Move them to _impl !
 #include <windows.h>
 #include <tlhelp32.h>
-
-#include "Exports.h"
 
 class Process;
 
@@ -13,6 +15,7 @@ class Process;
  * (not the object inside ProcessVector).
  */
 class W32_EXPORT ProcessIterator {
+
 	// Snapshot of the processes presented by the os.
 	HANDLE snapshot;
 	// Copy of the snapshot ? Required to keep the state.
@@ -26,9 +29,11 @@ public:
 	 */
 	ProcessIterator();
 
-	ProcessIterator(const ProcessIterator& rhs);
+	ProcessIterator(const ProcessIterator&);
 	~ProcessIterator();
 	
+	ProcessIterator& operator=(const ProcessIterator&);
+
 	ProcessIterator begin();
 	ProcessIterator end();
 
@@ -36,6 +41,7 @@ public:
 	ProcessIterator& operator++();   // Pre incr.
 
 	// Deref, returning the IHandle object or directly the Entry -member ??
+	// Finalizing the design requires these to be defined. Abstract it directly from ProcessIterator ?
 	/*
 	&operator *();
 	operator ->();

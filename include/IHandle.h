@@ -1,7 +1,7 @@
 #ifndef W32ITERATOR_HANDLEINTERFACE_H
 #define W32ITERATOR_HANDLEINTERFACE_H
 
-#include "Exports.h"
+#include "dllexport.h"
 
 /**
  * Defines a interface for the handle object.

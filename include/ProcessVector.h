@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Exports.h"
+#include "dllexport.h"
 #include "ProcessIterator.h"
 
 class Process;
