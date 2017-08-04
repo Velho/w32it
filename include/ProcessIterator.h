@@ -5,8 +5,7 @@
 
 // Anything to forward declare from these ??
 // TODO Move them to _impl !
-#include <windows.h>
-#include <tlhelp32.h>
+#include <memory>
 
 class Process;
 
@@ -15,11 +14,9 @@ class Process;
  * (not the object inside ProcessVector).
  */
 class W32_EXPORT ProcessIterator {
-
-	// Snapshot of the processes presented by the os.
-	HANDLE snapshot;
-	// Copy of the snapshot ? Required to keep the state.
-	PROCESSENTRY32 entry;
+	// Implementation details.
+	struct ProcessIteratorImpl;
+	std::unique_ptr<ProcessIteratorImpl> impl;
 	// Created object, allocated on the vector.
 	Process *ptr;
 public:
@@ -30,9 +27,11 @@ public:
 	ProcessIterator();
 
 	ProcessIterator(const ProcessIterator&);
+	ProcessIterator(ProcessIterator&&) = delete; // TODO
 	~ProcessIterator();
 	
 	ProcessIterator& operator=(const ProcessIterator&);
+	ProcessIterator operator=(ProcessIterator&&) = delete; // TODO
 
 	ProcessIterator begin();
 	ProcessIterator end();
