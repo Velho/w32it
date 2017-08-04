@@ -9,8 +9,11 @@ Thank you.
 ### TODO
 
 - [ ] Finish the iterator implementation.
-- [ ] Header only.
+  - [ ] Process.
+  - [ ] Modules.
+  - [ ] Threads.
 
+- [ ] Header only. 
 ### Author
 
 - @Velho
